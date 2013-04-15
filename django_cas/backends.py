@@ -103,7 +103,8 @@ class CASBackend(ModelBackend):
             extra = {}
             if response.getElementsByTagName('cas:extraAttributes'):
                 extra_node = response.getElementsByTagName('cas:extraAttributes')[0]
-                extra = dict([(c.nodeName, c.firstChild.nodeValue)
+                extra = dict([(c.nodeName,
+                               c.firstChild and c.firstChild.nodeValue or '')
                               for c in iterate_children(extra_node)
                               if c.nodeName != '#text'])
 
