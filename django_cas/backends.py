@@ -52,7 +52,7 @@ class CASBackend(ModelBackend):
 
         if settings.CAS_USE_EXTRA:
             if 'role' in extra and 'admin' in extra['role']:
-                if not user.is_staff or user.is_superuser:
+                if not user.is_staff or not user.is_superuser:
                     user.is_staff = True
                     user.is_superuser = True
                     user.save()
