@@ -35,4 +35,5 @@ to the admin interface.
               'django_cas/management/commands'],
     url='https://github.com/fjollberg/django-cas2',
     version='KTH-2.0.3',
+    install_requires=['requests'],
 )
