@@ -51,11 +51,13 @@ class CASBackend(ModelBackend):
                 logger.error("Failed authentication, user '%s' does not exist", username)
 
         if settings.CAS_USE_EXTRA:
+            if 'email' in extra:
+                user.email = extra['email']
             if 'role' in extra and 'admin' in extra['role']:
                 if not user.is_staff or not user.is_superuser:
                     user.is_staff = True
                     user.is_superuser = True
-                    user.save()
+            user.save()
 
         return user
 
