@@ -8,10 +8,12 @@ from xml.dom import minidom
 
 from django.conf import settings
 from django.contrib.auth.backends import ModelBackend
-from django.contrib.auth.models import User
 from django_cas.exceptions import CasTicketException
 from django_cas.models import Tgt, PgtIOU
 import requests
+
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 __all__ = ['CASBackend']
 
@@ -42,7 +44,7 @@ class CASBackend(ModelBackend):
 
 
         try:
-            user = User.objects.get(username=username)
+            user = User.objects.get(email=username)
         except User.DoesNotExist:
             if settings.CAS_AUTO_CREATE_USERS:
                 logger.debug("User '%s' auto created by CAS backend", username)
